@@ -1,0 +1,11 @@
+
+{% extends 'blog/base.html' %}
+
+{% block title %}Description de post{% endblock %}
+
+{% block content %}
+    <a href="{% url 'blog-list' %}">Retour à la liste</a>
+    <h1>{{blog_post.title|title}}</h1>
+<!--    attention cette fonction number_of_words est définie dans le model de BlogPost pour chercher le nombre de mots dans content-->
+    <p>{{blog_post.content}}</p>
+{% endblock %}

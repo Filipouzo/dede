@@ -1,0 +1,31 @@
+
+{% extends 'blog/base.html' %}
+
+{% block title %}Liste des posts{% endblock %}
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+        <h1>Liste des posts</h1>
+        <div class="liste">
+            {%for n in all_blog_posts %}
+            {% with categories_nbr=n.category.count %}
+            <!--la balise with permet de spécifier une variable interne-->
+            <!--Attention à ne pas oublier la balose endwith-->
+            <a href="{% url 'blog-post' numero_post=n.id %}">
+                        <h2>{{ forloop.counter }}- {{n.title|title}}</h2>
+            </a>
+            <small>Cet article est présent dans {{categories_nbr}} catégories.</small>
+            </br>
+            <p>{{n.content|truncatewords:10}}</p>
+
+            <hr>
+            {% endwith %}
+            {% empty %}
+            <h2>Il n'y a aucun article</h2>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+
+{% endblock %}
